@@ -1,7 +1,17 @@
 version: "3"
 services:
-  server:
+  node:
     build: .
     ports:
       - 9001:8080
-
+    depends_on:
+      - db
+  db:
+    volumes:
+      - words_data_9001:/var/lib/postgresql/data
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: user
+volumes:
+  words_data_9001:

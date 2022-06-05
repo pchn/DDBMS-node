@@ -1,4 +1,7 @@
 import { createExpressServer } from 'routing-controllers'
+import { Database } from './database/Database'
+import { Node } from './node/Node'
+import { Rest } from './REST/Rest'
 
 require('reflect-metadata')
 
@@ -13,15 +16,18 @@ dotenv.config()
 /* Getting environment variables */
 logger.level = process.env.LOG_LEVEL
 const port = process.env.PORT
+export const dispatcher = process.env.DISPATCHER
+export const ip = process.env.IP
 /* ----------------------------- */
 
 /* Initializing classes */
-
+let database = new Database()
+Node.init()
 /* -------------------- */
 
 /* Create express app, register all controller routes and get express app instance */
 const app = createExpressServer({
-  controllers: [] // specify controllers we want to use
+  controllers: [Rest] // specify controllers we want to use
 })
 
 app.use(bp.json())

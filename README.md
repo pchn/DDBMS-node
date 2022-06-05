@@ -1,4 +1,4 @@
-# DDBMS-server
+# DDBMS-node
 
 Regular server of distributed DBMS.
 
